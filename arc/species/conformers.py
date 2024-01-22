@@ -66,6 +66,7 @@ from arc.common import (ARC_PATH,
 from arc.exceptions import ConformerError, InputError
 from arc.job.local import execute_command
 import arc.plotter
+from arc.level import Level
 from arc.species import converter, vectors
 from arc.parser import parse_xyz_from_file
 
@@ -1174,7 +1175,7 @@ def get_force_field_energies(label: str,
 
 def get_force_field_energies_solvation(label: str,
                                        ff_xyzs: list,
-                                       conf_generation_level: dict,
+                                       conf_generation_level: Level,
                                        conf_path: str,
                                        ) -> Tuple[list, list]:
     """
@@ -1194,9 +1195,9 @@ def get_force_field_energies_solvation(label: str,
     ARC_child_path = conf_path
     content = dict()
     content['project'] = f'conf_gen_multi_{label}'
-    content['opt_level'] = {'method': conf_generation_level['method'],
-                            'solvaion_method': conf_generation_level['solvation_method'] or 'SMD',
-                            'solvent': conf_generation_level['solvent'],
+    content['opt_level'] = {'method': conf_generation_level.method,
+                            'solvaion_method': conf_generation_level.solvation_method or 'SMD',
+                            'solvent': conf_generation_level.solvent,
                             }
     content['report_e_elect'] = True
     content['job_types'] = {'opt': True,
