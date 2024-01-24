@@ -1089,7 +1089,7 @@ class Scheduler(object):
                                                label, 'geometry', 'conformers'),
                         conf_generation_level=self.conf_generation_level if self.conf_generation_level is not None else None,
                         conf_path=os.path.join(self.project_directory, 'calcs', 'Species',
-                                               f'{label}_multi', 'conf_gen'),
+                                               f'{label}_multi', 'input.yml'),
                         )
                 self.process_conformers(label)
             # TSs:
