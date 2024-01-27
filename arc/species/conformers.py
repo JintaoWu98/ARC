@@ -1196,7 +1196,7 @@ def get_force_field_energies_solvation(label: str,
     content = dict()
     content['project'] = f'conf_gen_multi_{label}'
     content['opt_level'] = {'method': conf_generation_level.method,
-                            'solvaion_method': conf_generation_level.solvation_method or 'SMD',
+                            'solvation_method': conf_generation_level.solvation_method or 'SMD',
                             'solvent': conf_generation_level.solvent,
                             }
     content['report_e_elect'] = True
