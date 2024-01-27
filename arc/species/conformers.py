@@ -1216,7 +1216,7 @@ def get_force_field_energies_solvation(label: str,
         spc_dict['xyz'] = xyz
         spc_dict['multi_species'] = f'{label}_multi'
         content['species'].append(spc_dict)
-    save_yaml_file(path=ARC_child_path, content=content)
+    save_yaml_file(path=os.path.join(ARC_child_path, 'input.yml'), content=content)
     cmd = ['conda activate arc_env', f'python {ARC_PATH}/ARC.py {ARC_child_path}/input.yml']
     stdout, stderr = execute_command(command=cmd, shell=True)
     if len(stderr) > 0 or len(stdout) == 0:
