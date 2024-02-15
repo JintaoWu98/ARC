@@ -155,6 +155,8 @@ class ARC(object):
         trsh_ess_jobs (bool, optional): Whether to attempt troubleshooting failed ESS jobs. Default is ``True``.
         output (dict, optional): Output dictionary with status and final QM file paths for all species.
                                  Only used for restarting.
+        output_multi_spc (dict, optional): Output dictionary with status and final QM file paths for the multi species. 
+                                           Only used for restarting.
         running_jobs (dict, optional): A dictionary of jobs submitted in a precious ARC instance, used for restarting.
         ts_adapters (list, optional): Entries represent different TS adapters.
         report_e_elect (bool, optional): Whether to report electronic energy. Default is ``False``.
@@ -182,6 +184,8 @@ class ARC(object):
             Job types not defined in adaptive levels will have non-adaptive (regular) levels.
         output (dict): Output dictionary with status and final QM file paths for all species. Only used for restarting,
                        the actual object used is in the Scheduler class.
+        output_multi_spc (dict): Output dictionary with status and final QM file paths for the multi species. 
+                                 Only used for restarting, the actual object used is in the Scheduler class.
         bac_type (str): The bond additivity correction type. 'p' for Petersson- or 'm' for Melius-type BAC.
                         ``None`` to not use BAC.
         arkane_level_of_theory (Level): The Arkane level of theory to use for AEC and BAC.
@@ -261,6 +265,7 @@ class ARC(object):
                  opt_level: Optional[Union[str, dict, Level]] = None,
                  orbitals_level: Optional[Union[str, dict, Level]] = None,
                  output: Optional[dict] = None,
+                 output_multi_spc: Optional[dict] = None,
                  project: Optional[str] = None,
                  project_directory: Optional[str] = None,
                  reactions: Optional[List[Union[ARCReaction, Reaction]]] = None,
@@ -294,6 +299,7 @@ class ARC(object):
         if not os.path.exists(self.project_directory):
             os.makedirs(self.project_directory)
         self.output = output
+        self.output_multi_spc = output_multi_spc
         self.standardize_output_paths()  # depends on self.project_directory
         self.running_jobs = running_jobs or dict()
         for jobs in self.running_jobs.values():
