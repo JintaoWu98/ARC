@@ -527,7 +527,7 @@ class ARC(object):
             restart_dict['orbitals_level'] = self.orbitals_level.as_dict() \
                 if not isinstance(self.orbitals_level, (dict, str)) else self.orbitals_level
         restart_dict['output'] = self.output
-        restart_dict['output_multi_spc'] = self.output_multi_spc
+        restart_dict['output_multi_spc'] = self.output_multi_spc if self.output_multi_spc else dict()
         restart_dict['project'] = self.project
         restart_dict['reactions'] = [rxn.as_dict() for rxn in self.reactions]
         restart_dict['running_jobs'] = self.running_jobs
