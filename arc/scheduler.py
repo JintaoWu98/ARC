@@ -1201,7 +1201,8 @@ class Scheduler(object):
             print('Line 1200, output_multi_spc is:', self.output_multi_spc, '\n')
             if self.output_multi_spc[self.species_dict[label].multi_species].get(key, False):
                 return
-            self.output_multi_spc[self.species_dict[label].multi_species][key] = True
+            # self.output_multi_spc[self.species_dict[label].multi_species][key] = True
+            label_single_spc = label
             label = [species.label for species in self.species_list
                      if species.multi_species == self.species_dict[label].multi_species]
         self.run_job(label=label, 
@@ -1209,6 +1210,8 @@ class Scheduler(object):
                      level_of_theory=self.opt_level,
                      job_type='opt', 
                      fine=fine)
+        if isinstance(label, list):
+            self.output_multi_spc[self.species_dict[label_single_spc].multi_species][key] = True
 
     def run_composite_job(self, label: str):
         """
