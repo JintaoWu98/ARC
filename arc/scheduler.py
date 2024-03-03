@@ -1195,6 +1195,7 @@ class Scheduler(object):
             raise SpeciesError(f'Cannot execute opt job for {label} without xyz (got None for Species.initial_xyz)')
         if self.species_dict[label].multi_species:
             key = 'fine' if fine else 'opt'
+            print('Line 1199, label is:', label)
             if self.output_multi_spc[self.species_dict[label].multi_species].get(key, False):
                 return
             self.output_multi_spc[self.species_dict[label].multi_species][key] = True
