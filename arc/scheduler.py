@@ -301,7 +301,9 @@ class Scheduler(object):
             self.rxn_dict[rxn.index] = rxn
         if self.restart_dict is not None:
             self.output = self.restart_dict['output']
+            print('Lin304, restart_dict is not None:',  self.restart_dict, '\n')
             self.output_multi_spc = self.restart_dict['output_multi_spc'] if 'output_multi_spc' in self.restart_dict else dict()
+            print('Lin304, output_multi_spc is not None:',  self.output_multi_spc, '\n')
             if 'running_jobs' in self.restart_dict:
                 self.restore_running_jobs()
         self.initialize_output_dict()
