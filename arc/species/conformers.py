@@ -1033,7 +1033,7 @@ def add_torsion_symmetry(top1, mol_list, torsion_scan):
                         # Check if the new angle, adjusted by ±30 degrees, overlaps with any existing angles
                         if not any((new_angle - 30) % 360 <= existing_angle <= (new_angle + 30) % 360 for existing_angle in torsion_scan + new_angles):
                             new_angles.append(new_angle)
-                    break
+                            break
     
             # Extend the original list with non-overlapping new angles
             torsion_scan.extend(new_angles)
