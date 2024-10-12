@@ -110,7 +110,8 @@ class JobTypeEnum(str, Enum):
     The available jon types are a finite set.
     """
     composite = 'composite'
-    conformers = 'conformers'  # conformer optimization (not generation)
+    conf_opt = 'conf_opt'  # conformer optimization (not generation)
+    conf_sp = 'conf_sp'  # conformer single point
     freq = 'freq'
     gen_confs = 'gen_confs'  # conformer generation
     irc = 'irc'
@@ -385,9 +386,9 @@ class JobAdapter(ABC):
             if self.species is not None:
                 if len(self.species) > 1:
                     self.iterate_by.append('species')
-                if job_type == 'conformers':
+                if job_type == 'conf_opt':
                     if self.species is not None and sum(len(species.conformers) for species in self.species) > 10:
-                        self.iterate_by.append('conformers')
+                        self.iterate_by.append('conf_opt')
                         self.number_of_processes += sum([len(species.conformers) for species in self.species])
                 for species in self.species:
                     if job_type in ['sp', 'opt', 'freq', 'optfreq', 'composite', 'ornitals', 'onedmin', 'irc']:
@@ -456,7 +457,7 @@ class JobAdapter(ABC):
             else:
                 for species in self.species:
                     data[species.label] = list()
-                    if 'conformers' in self.iterate_by:
+                    if 'conf_opt' in self.iterate_by:
                         for conformer in species.conformers:
                             data[species.label].append(DataPoint(charge=species.charge,
                                                                  job_types=['opt'],
