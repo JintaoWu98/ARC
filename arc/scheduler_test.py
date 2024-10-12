@@ -71,7 +71,7 @@ H      -1.82570782    0.42754384   -0.56130718"""
                                project_directory=cls.project_directory, job_num=104)
         cls.rmg_database = rmgdb.make_rmg_database_object()
         cls.job_types1 = {'conf_opt': True,
-                          'cong_sp': False,
+                          'conf_sp': False,
                           'opt': True,
                           'fine': False,
                           'freq': True,
@@ -81,7 +81,7 @@ H      -1.82570782    0.42754384   -0.56130718"""
                           'lennard_jones': False,
                           }
         cls.job_types2 = {'conf_opt': True,
-                          'cong_sp': False,
+                          'conf_sp': False,
                           'opt': True,
                           'fine': False,
                           'freq': True,
