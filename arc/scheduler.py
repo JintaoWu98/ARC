@@ -885,10 +885,15 @@ class Scheduler(object):
         elif conformer is not None:
             # Running a conformer DFT job. Append differently to job_dict.
             self.running_jobs[label] = list() if label not in self.running_jobs else self.running_jobs[label]
-            self.running_jobs[label].append(f'conformer{conformer}')  # mark as a running job
+            self.running_jobs[label].append(f'{job_type}_{conformer}')  # mark as a running job
             if 'conf_opt' not in self.job_dict[label]:
                 self.job_dict[label]['conf_opt'] = dict()
-            self.job_dict[label]['conf_opt'][conformer] = job  # save job object
+            if 'conf_sp' not in self.job_dict[label] and job_type == 'conf_sp':
+                self.job_dict[label]['conf_sp'] = dict()
+            if job_type == 'conf_opt':
+                self.job_dict[label]['conf_opt'][conformer] = job  # save job object
+            elif job_type == 'conf_sp':
+                self.job_dict[label]['conf_sp'][conformer] = job  # save job object
         elif tsg is not None:
             # Running a TS guess job. Append differently to job_dict.
             self.running_jobs[label] = list() if label not in self.running_jobs else self.running_jobs[label]

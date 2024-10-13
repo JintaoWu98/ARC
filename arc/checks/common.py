@@ -36,8 +36,10 @@ def get_i_from_job_name(job_name: str) -> Optional[int]:
         Optional[int]: The corresponding conformer or tsg index.
     """
     i = None
-    if 'conformer' in job_name:
-        i = int(job_name[9:])
+    if 'conf_opt' in job_name:
+        i = int(job_name[8:])
+    elif 'conf_sp' in job_name:
+        i = int(job_name[7:])
     elif 'tsg' in job_name:
         i = int(job_name[3:])
     return i
