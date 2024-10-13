@@ -231,7 +231,8 @@ output:
     job_types:
       bde: true
       composite: false
-      conformers: true
+      conf_opt: true
+      conf_sp: false
       fine: true
       freq: true
       irc: true
@@ -256,7 +257,8 @@ output:
     job_types:
       bde: true
       composite: false
-      conformers: true
+      conf_opt: true
+      conf_sp: false
       fine: true
       freq: true
       irc: true
