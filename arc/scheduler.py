@@ -549,7 +549,7 @@ class Scheduler(object):
                     continue
                 job_list = self.running_jobs[label]
                 for job_name in job_list:
-                    if 'conformer' in job_name:
+                    if 'conf_opt' in job_name:
                         i = get_i_from_job_name(job_name)
                         job = self.job_dict[label]['conf_opt'][i]
                         if not (job.job_id in self.server_job_ids and job.job_id not in self.completed_incore_jobs):
@@ -562,7 +562,7 @@ class Scheduler(object):
                             # Just terminated a conformer job.
                             # Are there additional conformer jobs currently running for this species?
                             for spec_jobs in job_list:
-                                if 'conformer' in spec_jobs and spec_jobs != job_name:
+                                if 'conf_opt' in spec_jobs and spec_jobs != job_name:
                                     break
                             else:
                                 # All conformer jobs terminated.
@@ -599,7 +599,7 @@ class Scheduler(object):
                                 self.run_conformer_jobs(labels=[label])
                             self.timer = False
                             break
-                    elif 'opt' in job_name:
+                    elif 'opt' in job_name and 'conf_opt' not in job_name:
                         # val is 'opt1', 'opt2', etc., or 'optfreq1', optfreq2', etc.
                         job = self.job_dict[label]['opt'][job_name]
                         if not (job.job_id in self.server_job_ids and job.job_id not in self.completed_incore_jobs):
@@ -3133,7 +3133,7 @@ class Scheduler(object):
                 if i is None:
                     job_type = '_'.join(job_name.split('_')[:-1])  # Consider job types such as 'directed_scan'.
                     job = self.job_dict[label][job_type][job_name]
-                elif 'conformer' in job_name:
+                elif 'conf_opt' in job_name:
                     job = self.job_dict[label]['conf_opt'][i]
                 elif 'tsg' in job_name:
                     job = self.job_dict[label]['tsg'][i]
@@ -3660,9 +3660,9 @@ class Scheduler(object):
                     self.restart_dict['running_jobs'][spc.label] = \
                         [self.job_dict[spc.label][job_name.rsplit('_', 1)[0]][job_name].as_dict()
                          for job_name in self.running_jobs[spc.label]
-                         if 'conformer' not in job_name and 'tsg' not in job_name] \
+                         if 'conf_opt' not in job_name and 'tsg' not in job_name] \
                         + [self.job_dict[spc.label]['conf_opt'][get_i_from_job_name(job_name)].as_dict()
-                           for job_name in self.running_jobs[spc.label] if 'conformer' in job_name] \
+                           for job_name in self.running_jobs[spc.label] if 'conf_opt' in job_name] \
                         + [self.job_dict[spc.label]['tsg'][get_i_from_job_name(job_name)].as_dict()
                            for job_name in self.running_jobs[spc.label] if 'tsg' in job_name]
             logger.debug(f'Dumping restart dictionary:\n{self.restart_dict}')

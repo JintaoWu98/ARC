@@ -693,6 +693,7 @@ class JobAdapter(ABC):
                     job_num = 0
             self.job_num = job_num
         # 2. Set other related attributes job_name and job_server_name.
+        self.job_server_name = self.job_server_name or 'a' + str(self.job_num)
         if self.conformer is not None and self.job_name is None:
             self.job_name = f'{self.job_type}_{self.conformer}_{self.job_server_name}'
         elif self.tsg is not None and (self.job_name is None or 'tsg_a' in self.job_name):
@@ -1095,7 +1096,7 @@ class JobAdapter(ABC):
                 local = 'local '
             else:
                 server = f' on {self.server}'
-        if 'conformer' in self.job_name or 'tsg' in self.job_name:
+        if 'conf_opt' in self.job_name or 'tsg' in self.job_name:
             job_server_name = f' ({self.job_server_name})'
         execution_type = {'incore': 'incore job', 'queue': 'queue job', 'pipe': 'job array (pipe)'}[self.execution_type]
         pivots = f' for pivots {[[tor[1] + 1, tor[2] + 1] for tor in self.torsions]}' if self.torsions is not None else ''
