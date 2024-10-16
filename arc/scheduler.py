@@ -562,7 +562,8 @@ class Scheduler(object):
                                     self.run_job(label=label,
                                                  xyz=self.species_dict[label].conformers[i],
                                                  level_of_theory=self.conformer_sp_level,
-                                                 job_type='conf_sp',)
+                                                 job_type='conf_sp',
+                                                 conformer=i,)
                                 if troubleshooting_conformer:
                                     break
                             # Just terminated a conformer job.
