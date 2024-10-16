@@ -3669,9 +3669,11 @@ class Scheduler(object):
                     self.restart_dict['running_jobs'][spc.label] = \
                         [self.job_dict[spc.label][job_name.rsplit('_', 1)[0]][job_name].as_dict()
                          for job_name in self.running_jobs[spc.label]
-                         if 'conf_opt' not in job_name and 'tsg' not in job_name] \
+                         if all(x not in job_name for x in ['conf_opt', 'conf_sp', 'tsg'])] \
                         + [self.job_dict[spc.label]['conf_opt'][get_i_from_job_name(job_name)].as_dict()
                            for job_name in self.running_jobs[spc.label] if 'conf_opt' in job_name] \
+                        + [self.job_dict[spc.label]['conf_sp'][get_i_from_job_name(job_name)].as_dict()
+                           for job_name in self.running_jobs[spc.label] if 'conf_sp' in job_name] \
                         + [self.job_dict[spc.label]['tsg'][get_i_from_job_name(job_name)].as_dict()
                            for job_name in self.running_jobs[spc.label] if 'tsg' in job_name]
             logger.debug(f'Dumping restart dictionary:\n{self.restart_dict}')
