@@ -577,7 +577,7 @@ class Scheduler(object):
                                 if self.species_dict[label].is_ts:
                                     self.determine_most_likely_ts_conformer(label)
                                 else:
-                                    self.determine_most_stable_conformer(label, sp_flag=True)  # also checks isomorphism
+                                    self.determine_most_stable_conformer(label, sp_flag=True if self.job_types['conf_sp'] else False)  # also checks isomorphism
                                 if self.species_dict[label].initial_xyz is not None:
                                     # if initial_xyz is None, then we're probably troubleshooting conformers, don't opt
                                     if not self.composite_method:
