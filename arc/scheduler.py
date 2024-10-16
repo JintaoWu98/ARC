@@ -558,7 +558,7 @@ class Scheduler(object):
                             successful_server_termination = self.end_job(job=job, label=label, job_name=job_name)
                             if successful_server_termination:
                                 troubleshooting_conformer = self.parse_conformer(job=job, label=label, i=i)
-                                if self.job_types['conf_sp'] and not troubleshooting_conformer:
+                                if 'conf_opt' in job_name and self.job_types['conf_sp'] and not troubleshooting_conformer:
                                     self.run_job(label=label,
                                                  xyz=self.species_dict[label].conformers[i],
                                                  level_of_theory=self.conformer_sp_level,
