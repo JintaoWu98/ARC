@@ -3144,6 +3144,8 @@ class Scheduler(object):
                     job = self.job_dict[label][job_type][job_name]
                 elif 'conf_opt' in job_name:
                     job = self.job_dict[label]['conf_opt'][i]
+                elif 'conf_sp' in job_name:
+                    job = self.job_dict[label]['conf_sp'][i]
                 elif 'tsg' in job_name:
                     job = self.job_dict[label]['tsg'][i]
                 else:
