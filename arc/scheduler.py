@@ -3088,6 +3088,9 @@ class Scheduler(object):
             conf_time = extremum_list([job.run_time for job in self.job_dict[label]['conf_opt'].values()],
                                       return_min=False) \
                 if 'conf_opt' in self.job_dict[label].keys() else zero_delta
+            conf_time = conf_time + extremum_list([job.run_time for job in self.job_dict[label]['conf_sp'].values()],
+                                      return_min=False) \
+                if 'conf_sp' in self.job_dict[label].keys() else zero_delta
             tsg_time = extremum_list([job.run_time for job in self.job_dict[label]['tsg'].values()], return_min=False) \
                 if 'tsg' in self.job_dict[label].keys() else zero_delta
             opt_time = sum_time_delta([job.run_time for job in self.job_dict[label]['opt'].values()]) \
