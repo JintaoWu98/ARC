@@ -3099,8 +3099,8 @@ class Scheduler(object):
                 if 'composite' in self.job_dict[label].keys() else zero_delta
             other_time = extremum_list([sum_time_delta([job.run_time for job in job_dictionary.values()])
                                         for job_type, job_dictionary in self.job_dict[label].items()
-                                        if job_type not in ['conf_opt', 'opt', 'composite']], return_min=False) \
-                if any([job_type not in ['conf_opt', 'opt', 'composite']
+                                        if job_type not in ['conf_opt', 'conf_sp', 'opt', 'composite']], return_min=False) \
+                if any([job_type not in ['conf_opt', 'conf_sp', 'opt', 'composite']
                         for job_type in self.job_dict[label].keys()]) else zero_delta
             self.species_dict[label].run_time = self.species_dict[label].run_time \
                                                 or (conf_time or zero_delta) + \
