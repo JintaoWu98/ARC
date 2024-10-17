@@ -2162,9 +2162,8 @@ class Scheduler(object):
                 self.species_dict[label].most_stable_conformer = xyzs_in_original_order.index(conformer_xyz)
                 logger.info(f'Conformer number {xyzs_in_original_order.index(conformer_xyz)} for species {label} is '
                             f'used for geometry optimization.')
-                if not sp_flag:
-                    self.output[label]['job_types']['conf_opt'] = True
-                elif sp_flag:
+                self.output[label]['job_types']['conf_opt'] = True
+                if sp_flag:
                     self.output[label]['job_types']['conf_sp'] = True
 
     def determine_most_likely_ts_conformer(self, label: str):
